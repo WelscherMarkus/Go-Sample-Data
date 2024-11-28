@@ -52,6 +52,8 @@ func TestFillStructs(t *testing.T) {
 			t.Fatal("expected date to be filled")
 		}
 	}
+
+	t.Log("FillStructs() successfully filled the existing struct fields")
 }
 
 func TestGenerateNewStructs(t *testing.T) {
@@ -94,4 +96,6 @@ func TestGenerateNewStructs(t *testing.T) {
 	if len(users) != 10 {
 		t.Fatalf("expected 10 users, got %d", len(users))
 	}
+
+	t.Log("GenerateNewStructs() successfully generated 10 new structs")
 }
