@@ -2,13 +2,20 @@ package sample
 
 import (
 	"bufio"
+	_ "embed"
 	"fmt"
 	"log"
 	"math/rand/v2"
-	"os"
 	"reflect"
+	"strings"
 	"time"
 )
+
+//go:embed pkg/firstNames.txt
+var firstNamesData string
+
+//go:embed pkg/lastNames.txt
+var lastNamesData string
 
 var firstNames []string
 var lastNames []string
@@ -124,27 +131,15 @@ func generateDateOfBirth() time.Time {
 }
 
 func loadFirstNames() {
-	file, err := os.Open("pkg/firstNames.txt")
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-
-	scammer := bufio.NewScanner(file)
-	for scammer.Scan() {
-		firstNames = append(firstNames, scammer.Text())
+	scanner := bufio.NewScanner(strings.NewReader(firstNamesData))
+	for scanner.Scan() {
+		firstNames = append(firstNames, scanner.Text())
 	}
 }
 
 func loadLastNames() {
-	file, err := os.Open("pkg/lastNames.txt")
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-
-	scammer := bufio.NewScanner(file)
-	for scammer.Scan() {
-		lastNames = append(lastNames, scammer.Text())
+	scanner := bufio.NewScanner(strings.NewReader(lastNamesData))
+	for scanner.Scan() {
+		lastNames = append(lastNames, scanner.Text())
 	}
 }
